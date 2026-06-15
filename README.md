@@ -19,3 +19,9 @@ ai-infra-agentic-ai-engineer-learning/
 ## Paired Solutions Repo
 
 [`ai-infra-agentic-ai-engineer-solutions`](https://github.com/ai-infra-curriculum/ai-infra-agentic-ai-engineer-solutions) carries the reference implementations.
+
+
+---
+
+<!-- aicg:maintained-by -->
+Maintained by [VeriSwarm.ai](https://veriswarm.ai)
