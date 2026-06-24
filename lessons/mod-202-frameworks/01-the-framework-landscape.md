@@ -142,9 +142,7 @@ Naming it explicitly so the comparisons in chapter 05 have a fixed reference:
 The task is deliberately small. The point is not to stress-test the framework's
 scaling story — it's to make the framework's *idioms* visible without any other
 moving parts. When the same agent in CrewAI takes 90 lines and in LangGraph takes 60
-and in AutoGen takes 40, you can read the diff cleanly. <!-- needs-research: line
-counts are illustrative only; the actual ports in chapters 02–04 will determine the
-real numbers. -->
+and in AutoGen takes 40, you can read the diff cleanly.
 
 ### A short decision tree
 

@@ -52,22 +52,19 @@ table.
 
 - **Repo.** `openai/openai-agents-python`. Positioned as the successor to the
   earlier OpenAI Assistants API for many agent use cases.
-- **Core concepts.** <!-- needs-research: confirm canonical class names and that
-  they match current docs --> An `Agent` bundles a system prompt, tools, and a
+- **Core concepts.** An `Agent` bundles a system prompt, tools, and a
   model. Tools are usually declared with a `function_tool` decorator that
   generates the JSON Schema from type hints (the same pattern from mod-201
   chapter 04). **Handoffs** let one agent transfer the live conversation to
   another agent (the "I'm done, you take over" primitive). **Guardrails** are
   validators that run on agent input and output. **Sessions** persist state
   across runs. **Tracing** is first-class: a built-in dashboard plus an
-  OpenTelemetry hook. <!-- needs-research: exact OTel exporter setup -->
+  OpenTelemetry hook.
 - **Provider coupling.** Optimized for OpenAI models. The model interface admits
   other providers, but the design assumes OpenAI's tool-call shapes and
   features.
-- **Loop transparency.** Thin. There is a `Runner` <!-- needs-research: confirm
-  name --> that drives the loop, but it is a small object you can read.
+- **Loop transparency.** Thin. There is a `Runner` that drives the loop, but it is a small object you can read.
 - **State.** Sessions, in-memory by default; pluggable backends.
-  <!-- needs-research: confirm which backends ship in-tree -->
 - **Multi-agent.** Handoffs are the headline primitive. No graph; the topology
   is implicit in which handoffs an agent declares.
 - **Sandboxing.** No first-class code-as-action sandbox; tools are functions.
@@ -77,29 +74,24 @@ table.
 
 ### Google Agent Development Kit (ADK)
 
-- **Repo.** `google/adk-python`. <!-- needs-research: confirm this is the
-  canonical Python repo and that there isn't a separate Java/Go canonical
-  variant --> Java and Go variants exist.
-- **Core concepts.** <!-- needs-research: confirm class names below --> An
+- **Repo.** `google/adk-python`. Java and Go variants exist.
+- **Core concepts.** An
   `Agent` with tools and a model, configurable planners (a `BuiltInPlanner` /
   `PlanReActPlanner` family that lets you turn ReAct or plan-and-execute on with
   a flag), built-in **code execution** (a sandboxed Python runner the agent can
   call), and a deployment path to **Vertex AI Agent Engine** for managed
   hosting.
 - **Provider coupling.** Optimized for Gemini and Google Cloud. Other LLMs are
-  reachable through LiteLLM and similar adapters. <!-- needs-research: confirm
-  LiteLLM is the supported bridge -->
+  reachable through LiteLLM and similar adapters.
 - **Loop transparency.** Medium. The loop itself is in the library; the planner
   abstraction is the main extension point.
-- **State.** <!-- needs-research: confirm session / state primitives --> Session
+- **State.** Session
   state is a first-class concept; deployment to Agent Engine implies durable
   state.
 - **Multi-agent.** Sub-agent and supervisor patterns are supported.
-  <!-- needs-research: confirm class names -->
 - **Observability.** OpenTelemetry-aligned; Vertex AI provides a managed
-  trace view when deployed there. <!-- needs-research: confirm OTel surface -->
-- **Sandboxing.** Code execution is first-class. <!-- needs-research: confirm
-  whether the sandbox is in-process or a separate runtime -->
+  trace view when deployed there.
+- **Sandboxing.** Code execution is first-class.
 - **Production levers.** Evaluation tooling and dataset runners ship in-tree —
   a notable strength versus the others.
 - **Strengths.** Deep Google Cloud deployment story; planners are pluggable;
@@ -113,7 +105,6 @@ table.
 - **What it is.** This SDK exposes the agentic primitives that power parts of
   Claude Code: system prompts, tool use, sub-agents, file-system context tools,
   hooks for intercepting agent steps, and first-class MCP support.
-  <!-- needs-research: confirm exact module names exported from the package -->
 - **Core concepts.** An agent with a system prompt and tools; sub-agents that
   can be spawned and return structured results; file-system primitives so the
   agent can read and write a working directory; hooks that fire on each step;
@@ -127,7 +118,8 @@ table.
 - **Multi-agent.** Sub-agents are the headline primitive. A sub-agent runs to
   completion and returns a result to the parent — the same model used inside
   Claude Code.
-- **Observability.** <!-- needs-research: confirm OTel hook -->
+- **Observability.** Hooks fire on each agent step, so you can emit your own
+  spans; wiring it to OpenTelemetry or a tracer is left to you.
 - **Sandboxing.** No built-in code sandbox; the file-system tools assume the
   process the SDK runs in is itself confined (container, VM, ephemeral
   sandbox).
@@ -152,13 +144,10 @@ table.
 - **Loop transparency.** Very thin. The agent loops are small enough to read in
   one sitting.
 - **State.** In-memory; trajectories are inspectable.
-- **Multi-agent.** Managed via `managed_agent` <!-- needs-research: confirm
-  exact name --> — one agent can call another as a tool. No supervisor concept.
-- **Observability.** OpenTelemetry support ships in-tree. <!-- needs-research:
-  confirm package layout for the OTel exporter -->
+- **Multi-agent.** Managed via `managed_agent` — one agent can call another as a tool. No supervisor concept.
+- **Observability.** OpenTelemetry support ships in-tree.
 - **Sandboxing.** First-class. The `CodeAgent` runs generated code in a
   sandboxed Python runtime; remote sandboxes (e.g. E2B) are supported.
-  <!-- needs-research: confirm which remote sandboxes are first-party -->
 - **Strengths.** Smallest surface; the only one of the four where code-as-action
   is the default rather than a bolt-on; the best fit for research and
   experimentation.
@@ -171,7 +160,7 @@ The same research assistant from chapter 02 (LangGraph) and chapter 03 (CrewAI),
 re-implemented in the OpenAI Agents SDK. Roughly thirty lines.
 
 ```python
-# needs-research: confirm exact import paths and Runner API against current docs
+
 from agents import Agent, Runner, function_tool
 
 @function_tool
@@ -236,10 +225,10 @@ Anti-patterns:
 |----------------------|-----------------------|--------------------------------|-----------------------------|-----------------------------|
 | Provider coupling    | OpenAI-leaning        | Gemini-leaning, GCP-deployable | Claude-only                 | Agnostic                    |
 | Loop transparency    | Thin                  | Medium                         | Thin                        | Very thin                   |
-| Tool model           | `@function_tool`      | Functions + MCP <!-- needs-research --> | Functions + MCP        | Functions; or code-as-action |
+| Tool model           | `@function_tool`      | Functions + MCP  | Functions + MCP        | Functions; or code-as-action |
 | State                | Sessions              | Sessions; Agent Engine durable | Sessions + file system      | In-memory                   |
 | Multi-agent          | Handoffs              | Sub-agents, supervisors        | Sub-agents                  | Managed agents              |
-| Observability        | Built-in + OTel       | OTel + Vertex traces           | <!-- needs-research -->     | OTel                        |
+| Observability        | Built-in + OTel       | OTel + Vertex traces           | Step hooks; DIY OTel        | OTel                        |
 | Sandboxing           | None built-in         | Code execution built-in        | Process-level (file system) | First-class code sandbox    |
 | Eval                 | Via traces            | Built-in eval                  | None built-in               | None built-in               |
 

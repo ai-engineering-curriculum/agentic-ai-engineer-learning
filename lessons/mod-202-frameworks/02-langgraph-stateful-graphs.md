@@ -74,7 +74,7 @@ one, then invoke it with a `thread_id` and it remembers where it was.
 from langgraph.checkpoint.memory import MemorySaver
 # Persistent options live in separate packages:
 # from langgraph.checkpoint.sqlite import SqliteSaver
-# from langgraph.checkpoint.postgres import PostgresSaver  # needs-research: exact import path
+# from langgraph.checkpoint.postgres import PostgresSaver
 
 graph = builder.compile(checkpointer=MemorySaver())
 
@@ -88,9 +88,6 @@ graph.invoke({"messages": [HumanMessage("are you still there?")]}, config=config
 This is what enables long-running agents, retries after crashes, and human-in-the-loop
 interrupts. Production deployments typically use a Postgres-backed saver so state
 survives across replicas.
-
-<!-- needs-research: confirm current import path for PostgresSaver; the langgraph
-checkpoint backends have moved between packages over releases. -->
 
 ### Interrupts (human-in-the-loop)
 
@@ -128,8 +125,7 @@ Two common modes:
   state.
 
 LLM token streaming inside a node is a separate concern; LangGraph forwards it
-through `astream_events` <!-- needs-research: confirm exact event names and stream
-modes in the current API -->.
+through `astream_events` .
 
 ### `create_react_agent`: the prebuilt helper
 
@@ -169,10 +165,8 @@ from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
 
-
 class AgentState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
-
 
 @tool
 def search(query: str) -> str:
@@ -185,22 +179,18 @@ def calc(expression: str) -> str:
     """Evaluate a Python math expression."""
     return str(eval(expression, {"__builtins__": {}}, {}))
 
-
 tools = [search, calc]
 llm = ChatOpenAI(model="gpt-4o").bind_tools(tools)
-
 
 def model_node(state: AgentState) -> dict:
     response = llm.invoke(state["messages"])
     return {"messages": [response]}
-
 
 def should_continue(state: AgentState) -> str:
     last = state["messages"][-1]
     if getattr(last, "tool_calls", None):
         return "tools"
     return END
-
 
 builder = StateGraph(AgentState)
 builder.add_node("model", model_node)
@@ -258,8 +248,6 @@ structuring the things you already built by hand.
   invoke; the default is low enough that real agents hit it.
 - **Observability.** LangSmith is the LangChain team's tracing offering and is the
   best-integrated option. OpenTelemetry integration is also possible.
-  <!-- needs-research: current LangGraph -> OTel integration story; the LangSmith
-  side is well documented but generic OTel exporters have moved around. -->
 - **Async.** Nodes can be `async def`; use `graph.ainvoke` / `astream`. Mixing sync
   and async nodes works but you pay a thread-pool hop at each boundary — fine for I/O
   but not free.

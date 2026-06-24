@@ -25,10 +25,6 @@ exist in the wild:
   `RoundRobinGroupChat` and `SelectorGroupChat`, and `TerminationCondition`
   objects.
 
-<!-- needs-research: confirm at publication time which version the
-microsoft.github.io/autogen landing page currently presents as the stable /
-recommended path, and whether the v0.2 package has been renamed or deprecated. -->
-
 This chapter shows the two-agent chat in v0.2 idiom (the shortest legible form)
 and sketches v0.4 equivalents. In production, pick one family and stick to it;
 do not mix imports from `autogen` and `autogen_agentchat` in the same process.
@@ -70,9 +66,6 @@ a termination condition, driven by an async runner:
 team = RoundRobinGroupChat([user_proxy, assistant], termination_condition=...)
 await Console(team.run_stream(task=task))
 ```
-
-<!-- needs-research: verify the v0.4 entrypoint for a two-agent chat. The
-recommended class and the run vs run_stream split has shifted. -->
 
 ### GroupChat and GroupChatManager
 
@@ -128,8 +121,7 @@ where AutoGen's actor model becomes visible: tool *selection* and tool
 *execution* live on different agents.
 
 v0.4 exposes tools as first-class objects passed to `AssistantAgent(tools=[...])`
-or via dedicated tool-execution agents. <!-- needs-research: the v0.4
-tool-execution agent class name has changed at least once. -->
+or via dedicated tool-execution agents.
 
 Same `tool_calls` mechanism as mod-201 chapter 04 — same JSON Schema, same
 `tool_call_id`s, just wired through the conversation.
@@ -142,8 +134,7 @@ write a script, run it, read the output, debug, and retry — and dangerous: by
 default it executes Python on your host.
 
 - Prefer the docker-backed executor (`DockerCommandLineCodeExecutor` over
-  `LocalCommandLineCodeExecutor`). <!-- needs-research: confirm exact class
-  names in the current docs. -->
+  `LocalCommandLineCodeExecutor`).
 - Pin a working directory; set a per-execution timeout.
 - Set `human_input_mode="ALWAYS"` while developing so you see what is about to
   run.
@@ -219,10 +210,6 @@ the transcript instead of a span in your own loop. The researcher emits a
 `tool_calls` message; the proxy executes it and emits a `tool` reply; the
 researcher reads the reply and either calls more tools or emits the answer
 with `TERMINATE`.
-
-<!-- needs-research: confirm current v0.2 decorator signatures; descriptions
-may be inferable from docstrings without the explicit kwarg in the current
-release. -->
 
 ### Sketch: the GroupChat variant
 

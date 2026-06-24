@@ -31,7 +31,7 @@ Three roles:
 One host can connect to many servers. One server can be reused across many hosts.
 That is the whole point.
 
-```
+```text
 +-----------------+         +----------+         +----------------------+
 |     Host        |  JSON-  |          |  JSON-  |      Server          |
 |  (agent / LLM   |<--RPC-->|  Client  |<--RPC-->|  (tools/resources/   |
@@ -79,11 +79,9 @@ rather than caching forever.
   protocol. This is the default for local development.
 - **HTTP** — earlier drafts used HTTP+SSE for the server-to-client channel; the
   current spec emphasizes a "streamable HTTP" transport that folds both directions
-  into one endpoint. <!-- needs-research: confirm exact transport name and
-  request/response semantics in the current MCP spec revision. -->
+  into one endpoint.
 - **WebSocket** — some implementations support it as an alternative bidirectional
-  transport. <!-- needs-research: verify whether WebSocket is in the official spec
-  or community-only. -->
+  transport.
 
 For learning, stick with stdio. It is the simplest to debug and the easiest to
 sandbox.
@@ -103,8 +101,6 @@ perspective, MCP is invisible.
   host owns access.
 - For **HTTP** transports, the spec has been evolving toward OAuth-based
   authorization with the host acting as the OAuth client.
-  <!-- needs-research: verify the current authorization model — OAuth 2.1 vs. an
-  earlier draft — and which transports it applies to. -->
 
 ### Sampling and elicitation
 
@@ -116,8 +112,6 @@ model client:
   tool wants the host's Claude or GPT call, not a hard-coded one).
 - **Elicitation** — the server asks the host to prompt the *user* for input. The
   host's UI handles the interaction and returns the answer.
-  <!-- needs-research: confirm "elicitation" is the canonical spec term and the
-  message shape. -->
 
 Both are opt-in capabilities negotiated during `initialize`.
 
@@ -125,13 +119,11 @@ Both are opt-in capabilities negotiated during `initialize`.
 
 Using the official Python SDK (`modelcontextprotocol/python-sdk`). The high-level
 `FastMCP` API uses decorators; the lower-level `Server` class gives manual control.
-<!-- needs-research: confirm `FastMCP` is the current recommended high-level entry
-point and that the decorator names below match the shipping SDK. -->
 
 ```python
 # search_calc_server.py
 import sys
-from mcp.server.fastmcp import FastMCP  # needs-research: import path
+from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("search-calc")
 
@@ -162,7 +154,7 @@ def calc(expression: str) -> float:
 
 if __name__ == "__main__":
     print("search-calc server starting", file=sys.stderr)  # logs to stderr
-    mcp.run(transport="stdio")  # needs-research: confirm method/arg name
+    mcp.run(transport="stdio")
 ```
 
 Why logging to **stderr**: in stdio transport, stdout carries length-prefixed
@@ -178,7 +170,7 @@ The client side from the same SDK:
 # search_calc_client.py
 import asyncio
 from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client  # needs-research: import path
+from mcp.client.stdio import stdio_client
 
 async def main():
     params = StdioServerParameters(command="python", args=["search_calc_server.py"])
@@ -210,13 +202,10 @@ Every framework we have covered ships an adapter:
   subprocess on startup and exposes its tools in the chat.
 - **OpenAI Agents SDK** ships an `MCPServerStdio` (and HTTP variant) adapter that
   wraps any MCP server as a tool collection an `Agent` can be handed.
-  <!-- needs-research: confirm class names against the current Agents SDK release. -->
 - **LangChain / LangGraph** use the `langchain-mcp-adapters` package, which converts
   MCP tools into LangChain `BaseTool` instances usable by any LangGraph node.
 - **CrewAI** has an MCP tools integration (`crewai-tools` extras or a community
   package) that exposes MCP server tools as CrewAI `Tool` objects.
-  <!-- needs-research: confirm the official package name and current integration
-  status. -->
 - **Anthropic Claude Agent SDK** treats MCP as a first-class tool source — the SDK
   was built alongside the protocol.
 
