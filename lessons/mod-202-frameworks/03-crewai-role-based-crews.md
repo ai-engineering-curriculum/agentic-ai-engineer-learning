@@ -47,7 +47,6 @@ and uses them for task assignment in hierarchical mode.
   who really loves numbers" does not.
 - **`llm` accepts any LangChain-compatible model.** Mix providers across agents
   in the same crew — cheap researcher, strong synthesizer.
-  <!-- needs-research: confirm current set of supported llm wrappers. -->
 - **`allow_delegation=True`** lets this agent hand work to another crew member.
   Off by default; turn it on deliberately.
 
@@ -87,13 +86,12 @@ A `Crew` bundles agents and tasks with a `process`. Two main shapes:
   No manager LLM, predictable token budget. **Default choice.**
 - **`Process.hierarchical`** — a manager LLM picks which task or agent to invoke
   next, can re-route, and can request more work. Useful when the order isn't
-  knowable up front. <!-- needs-research: confirm exact knobs (manager_llm vs
-  manager_agent) in current release. -->
+  knowable up front.
 
 The manager is itself an LLM. Every routing decision is an extra call with the
 full task list and agent roster in context — a meaningful cost premium over the
 same work expressed sequentially.
-<!-- needs-research: concrete published multiplier — keep qualitative. -->
+
 Use hierarchical only when control flow must be dynamic; otherwise stay
 sequential and branch in your own glue code.
 
@@ -130,14 +128,12 @@ The same rules from Chapter 04 apply: one intent per tool, tight schema,
 structured returns, errors as tool results not exceptions. CrewAI also ships a
 `crewai-tools` package with prebuilt integrations (search, file I/O, scraping);
 useful for prototyping, audit schemas before relying on them.
-<!-- needs-research: current list and stability of crewai-tools integrations. -->
 
 ### Memory
 
 CrewAI offers a built-in memory layer enabled per crew with `Crew(memory=True)`,
 with short-term (current run), long-term (across runs), and entity (named
-things) stores. <!-- needs-research: exact API names, embedding backends, and
-storage paths in current release. -->
+things) stores.
 
 - **In-framework memory** is good for short conversational threads and a
   handful of named entities the crew refers back to.
@@ -153,7 +149,6 @@ member via a built-in delegation tool. Powerful but easy to thrash on.
 - Only enable for agents that genuinely need it. A pure executor doesn't.
 - Watch token spend; every delegation is a nested mini-conversation.
 - Hard-cap delegation depth in your wrapper.
-  <!-- needs-research: current default max delegation depth in CrewAI. -->
 
 ### Flows (briefly)
 
@@ -240,8 +235,7 @@ structured JSON from the previous task, so it cannot hallucinate populations.
 
 - **Logging / telemetry.** `verbose=True` prints per-step reasoning to stdout
   — useful in dev, noisy in prod. CrewAI supports callbacks and telemetry
-  integrations; <!-- needs-research: confirm current callback API and which
-  vendors (AgentOps, Langfuse, OpenTelemetry) ship first-party integrations. -->
+  integrations;
   wire it into the same tracing pipeline as your other agents (mod-211).
 - **Cost control.** Hierarchical processes are noticeably more expensive than
   sequential ones because of the manager loop. Measure on a small fixture

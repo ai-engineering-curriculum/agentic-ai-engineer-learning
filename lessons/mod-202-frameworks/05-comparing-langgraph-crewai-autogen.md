@@ -16,25 +16,24 @@ you can apply on a new project before you have written any code.
 ## A side-by-side comparison
 
 Cells are deliberately terse. Where a capability exists only via an extension or
-is genuinely partial, the cell says so. `<!-- needs-research: ... -->` markers flag
-cells that warrant a docs check against the current release before you cite this
-table in a design review.
+is genuinely partial, the cell says so. Verify any cell against the current
+release before you cite this table in a design review — agent tooling moves fast.
 
 | Dimension                        | LangGraph                                      | CrewAI                                              | AutoGen                                                  |
 |----------------------------------|------------------------------------------------|-----------------------------------------------------|----------------------------------------------------------|
 | Mental model                     | Stateful graph of nodes and edges              | Crew of roles executing tasks via a process         | Group of conversational agents exchanging messages       |
 | Where state lives                | Typed `State` object, threaded through nodes   | Task context + crew memory                          | Message history of the group chat                        |
 | Branching                        | Conditional edges from a node                  | Process (sequential, hierarchical) + task guards    | Speaker-selection function or rules in GroupChat         |
-| Checkpointing                    | First-class (in-memory, SQLite, Postgres)      | Partial; memory persists, full run resume is bolt-on <!-- needs-research: CrewAI checkpoint primitives in 0.x --> | Partial; via state save on GroupChat <!-- needs-research: AutoGen v0.4 state APIs --> |
+| Checkpointing                    | First-class (in-memory, SQLite, Postgres)      | Partial; memory persists, full run resume is bolt-on  | Partial; via state save on GroupChat  |
 | Multi-agent                      | Supervisor / hand-off via subgraphs            | Native — the crew *is* multi-agent                  | Native — multiple agents are the default unit            |
 | Tool model                       | LangChain `Tool` objects bound to nodes        | `@tool` decorators attached to agents               | Function tools registered per agent                      |
 | Human-in-the-loop                | First-class via `interrupt()` and checkpoints  | Via `human_input=True` on tasks                     | Via `UserProxyAgent` in the chat                         |
-| Streaming                        | Token, node, and state streams                 | Task-level events <!-- needs-research: CrewAI event stream coverage --> | Token streaming per agent message                        |
+| Streaming                        | Token, node, and state streams                 | Task-level events  | Token streaming per agent message                        |
 | Debuggability                    | Graph inspectable; LangSmith integration       | Crew logs; verbose task transcripts                 | Read the transcript — that *is* the debugger             |
 | Persistence / durable execution  | First-class with checkpointers                 | Bolt-on; integrate with your own store              | Bolt-on; serialize the chat state                        |
 | Provider coupling                | Model-agnostic via LangChain                   | Model-agnostic; LiteLLM-friendly                    | Model-agnostic; first-class OpenAI, others via clients   |
 | Code execution support           | DIY via a tool                                 | DIY via a tool                                      | First-class `CodeExecutorAgent` (Docker / local)         |
-| Production-readiness levers      | Checkpoint, retry, interrupt, deploy via LangGraph Platform | Process choice, memory store, hosted CrewAI <!-- needs-research: current CrewAI hosted offering --> | Termination conditions, max-rounds, group-chat manager   |
+| Production-readiness levers      | Checkpoint, retry, interrupt, deploy via LangGraph Platform | Process choice, memory store, hosted CrewAI  | Termination conditions, max-rounds, group-chat manager   |
 
 A few rows deserve a word of caution. "Native multi-agent" in CrewAI and AutoGen
 does not mean *better* multi-agent — it means the framework's smallest unit is
