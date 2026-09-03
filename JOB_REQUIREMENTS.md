@@ -2,25 +2,28 @@
 
 **Role level:** 30 (build altitude)
 **Track:** `agentic-ai-engineer-learning`
-**Research window:** 2026-05-05 → 2026-08-03 (last 90 days)
-**Today:** 2026-08-03
-**Prior refresh:** 2026-06-15
+**Research window:** 2026-06-05 → 2026-09-03 (last 90 days)
+**Today:** 2026-09-03
+**Prior refresh:** 2026-08-03
 
 This file maps verbatim requirements from current Agentic AI Engineer job postings to the existing curriculum. Raw normalized data lives in [`.aicg/job-requirements.json`](.aicg/job-requirements.json); the strictly-additive proposal lives in [`.aicg/curriculum-plan-delta.json`](.aicg/curriculum-plan-delta.json).
 
 ## Summary
 
-- Postings sampled: **37** (all in the 2026-05-05 → 2026-08-03 window).
-- Equivalent titles counted: `Agentic AI Engineer`, `AI Agent Engineer`, `Agent Engineer`, `Applied AI Engineer`, `Generative AI Engineer`, `LLM Engineer`.
+- Postings sampled: **18** in-window (2026-06-05 → 2026-09-03). This is a 30-day delta check against the prior 2026-08-03 refresh (which sampled 37 postings and reached the same zero-additions conclusion), not a full re-baseline. Ashby-hosted (Netomi, APAS, Planera, Clera, Glacis) and Lever pages continued to block WebFetch; sample quality was preferred over padding to 25+.
+- Equivalent titles counted: `Agentic AI Engineer`, `AI Agent Engineer`, `Agent Engineer`, `Applied AI Engineer`, `Generative AI Engineer`, `LLM Engineer`. Title mix: 8 Agentic AI Engineer, 2 AI Agent Engineer, 3 Applied AI Engineer, 2 Generative AI Engineer, 2 AI Engineer, 1 LLM Engineer.
 - **Proposed delta this cycle: 0 modules, 0 exercises, 0 projects.** Every requirement above the continuity-bias threshold (≥3 distinct postings AND ≥30% frequency) is already owned by an existing module in `mod-201..207`.
-- Guardrails/security frequency climbed from 18% → 32% — crosses the threshold, but every specific sub-theme (I/O moderation, prompt injection, tool-permission enforcement, HITL approvals) is already covered by mod-206's four exercises. The emerging *credential-management* sub-theme is at 3 postings / 8% frequency — sub-threshold, tracked for next cycle.
-- Sub-threshold new signals tracked: AWS-native agent stack (Strands/AgentCore) 1 posting, Google ADK 3 postings (already in mod-202 scope), Claude Agent SDK as runtime 3+ postings (already in mod-202 scope), Pydantic AI + Vercel AI SDK 1–2 postings, AI-assisted dev-tool fluency 5 postings (not a curriculum-worthy build skill).
+- The three sub-threshold signals worth watching from last cycle all shifted, but none crossed 30%:
+  - **AWS Bedrock AgentCore + Strands Agents**: 3% → 22% (Cloud202, Cognitive Space, Cbase, Sharebite). Meaningful climb; will be absorbed into mod-202 exercise-05 comparison if it crosses threshold next cycle.
+  - **Google ADK**: 8% → 17% (TTEC, Realtech, Taller). Still below bar; already in mod-202 objectives.
+  - **Voice / realtime agents**: 5% → 6% (Carbon Technology only). Voice work is cordoning off into specialty `Senior Voice AI Engineer` titles rather than surfacing in general Agentic AI Engineer requirements — mod-208 voice sibling remains unwarranted.
+- Credential management / OAuth for agents held flat at 6% in job-requirement language *despite* the 2026-07-28 MCP spec now mandating OAuth 2.1 + PKCE + RFC 8707 Resource Indicators for remote MCP servers. Requirement wording lags spec changes; this is the strongest candidate to cross threshold in the next cycle.
 
 ## Methodology
 
-- Sources: greenhouse.io/job_boards (bulk), jobs.ashbyhq.com (postings extracted via search snippets when JS-only rendering blocked WebFetch), jobs.lever.co (403 to WebFetch; snippet extraction), builtin.com.
+- Sources: greenhouse.io/job_boards (bulk, full page fetches), jobs.ashbyhq.com (snippet/mirror extraction where JS-only rendering blocked WebFetch), jobs.lever.co (403 to WebFetch; mirror/snippet extraction), builtin.com, dice.com, techstars.com, linkedin.com/jobs (titles + snippets only), talent.com.
 - Per-posting capture: employer, title, URL, date_observed, date_posted (marked `estimated:YYYY-MM` when inferred), location, 4–8 verbatim/near-verbatim requirement quotes.
-- Frequency = distinct in-window postings citing the theme ÷ 37 in-window postings.
+- Frequency = distinct in-window postings citing the theme ÷ 18 in-window postings.
 - Threshold for a new curriculum item: ≥ 3 postings AND ≥ 30% frequency AND no existing module/exercise can be incrementally extended to cover it.
 - Source caveats documented in `summary.source_quality_caveats` in `.aicg/job-requirements.json`.
 
@@ -30,149 +33,144 @@ The table below lists every requirement theme observed, its in-window frequency,
 
 | # | Theme | Freq | Owner role | Coverage |
 |---|---|---|---|---|
-| 1 | Agent frameworks: LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, Anthropic/Claude Agent SDK, LlamaIndex, Semantic Kernel, Pydantic AI, Vercel AI SDK, smolagents | **65%** | `agentic-ai-engineer` (this) | [`mod-202-frameworks`](lessons/mod-202-frameworks) |
-| 2 | RAG, vector DBs, embedding strategies, agent memory | **49%** | `agentic-ai-engineer` | [`mod-203-rag-and-memory`](lessons/mod-203-rag-and-memory) |
-| 3 | Multi-agent orchestration (orchestrator-worker, handoffs, sub-agents, agent-to-agent) | **32%** | `agentic-ai-engineer` | [`mod-204-multi-agent-implementation`](lessons/mod-204-multi-agent-implementation) |
-| 4 | Evaluation harnesses (trajectory, LLM-as-judge, regression suites, CI-integrated evals) | **46%** | `agentic-ai-engineer` | [`mod-205-evaluation-observability`](lessons/mod-205-evaluation-observability) |
-| 5 | Observability (Langfuse, LangSmith, Phoenix, OTel GenAI, Datadog, Coralogix) | 27% | `agentic-ai-engineer` | [`mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md`](lessons/mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md) |
-| 6 | Function / tool calling, structured outputs (Pydantic / JSON schema) | **35%** | `agentic-ai-engineer` | [`mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md`](lessons/mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md) |
-| 7 | Model Context Protocol (MCP) — consumption AND authoring | 27% | `agentic-ai-engineer` | [`mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md`](lessons/mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md) |
-| 8 | API deployment (FastAPI/Flask, REST/GraphQL, async Python, Docker/K8s/IaC) | **46%** | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md`](lessons/mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md) |
-| 9 | Guardrails, prompt injection, OWASP LLM Top 10, agent sandboxing, credential mgmt, enterprise compliance | **32%** | `agentic-ai-engineer` (basics) → `ai-infra-security-learning` (depth) | [`mod-206-guardrails-implementation`](lessons/mod-206-guardrails-implementation); deep agent attack surface → `ai-infra-security-learning` (level 35) |
-| 10 | Durable execution / workflow engines (Temporal, Airflow, managed agent runtimes) | 11% | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-02-durable-execution-temporal.md`](lessons/mod-207-productionizing-agents/exercises/exercise-02-durable-execution-temporal.md) |
-| 11 | Cost / latency optimization (prompt caching, model routing, token budgets, LLM gateways) | 14% | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-03-caching-and-routing.md`](lessons/mod-207-productionizing-agents/exercises/exercise-03-caching-and-routing.md) |
-| 12 | Code / computer-use agents (Claude Code as build target, browser automation, code-execution sandboxes) | 19% | sub-threshold | mod-201 exercise-03 covers build-altitude basics; deeper computer-use is out-of-scope-link-out |
-| 13 | Forward-deployed / customer-facing agent engineering | 5% | soft-skill | Surface in `project-201` capstone README; not a curriculum module |
-| 14 | Human-in-the-loop oversight / escalation | 11% | `agentic-ai-engineer` | [`mod-206-guardrails-implementation/exercises/exercise-04-human-approval-checkpoints.md`](lessons/mod-206-guardrails-implementation/exercises/exercise-04-human-approval-checkpoints.md), [`mod-207-productionizing-agents/exercises/exercise-04-hitl-with-persistence.md`](lessons/mod-207-productionizing-agents/exercises/exercise-04-hitl-with-persistence.md) |
-| 15 | Agent modeling / post-training (SFT, RLHF, LoRA, synthetic data) | 16% | `ai-infra-ml-platform-learning` (level 30) | Out of scope here — link to ML Platform track. |
-| 16 | Voice / realtime / telephony agents | 5% | sub-threshold | Track; out-of-scope-link-out (see below) |
-| 17 | AI-assisted dev-tool fluency (Claude Code, Cursor, Copilot as USER) | 14% | cross-cutting expectation | Not curriculum-worthy — surface as a prerequisite expectation |
-| 18 | AWS-native agent runtime (Strands, AgentCore, Bedrock AgentCore) | 3% | sub-threshold | If it grows, mod-202 exercise-05 absorbs the comparison |
-| 19 | Google ADK + AgentSpace as named production stack | 8% | `agentic-ai-engineer` | Already in mod-202 objectives & exercise-05 comparison scope |
-| 20 | Low-code orchestration (n8n, Make, Zapier) alongside agent frameworks | 5% | sub-threshold | Out of scope for build-altitude Agentic AI Engineer |
+| 1 | Agent frameworks: LangGraph, LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, Anthropic/Claude Agent SDK, LlamaIndex, Semantic Kernel, Pydantic AI, Vercel AI SDK, smolagents, Strands | **56%** | `agentic-ai-engineer` (this) | [`mod-202-frameworks`](lessons/mod-202-frameworks) |
+| 2 | RAG, vector DBs, embeddings, agent memory | **56%** | `agentic-ai-engineer` | [`mod-203-rag-and-memory`](lessons/mod-203-rag-and-memory) |
+| 3 | Multi-agent orchestration (orchestrator-worker, handoffs, sub-agents, agent-to-agent, state-graph) | **50%** | `agentic-ai-engineer` | [`mod-204-multi-agent-implementation`](lessons/mod-204-multi-agent-implementation) |
+| 4 | Evaluation harnesses (LLM-as-judge, regression suites, golden traces, CI-integrated eval bar) | **56%** | `agentic-ai-engineer` | [`mod-205-evaluation-observability`](lessons/mod-205-evaluation-observability) |
+| 5 | Observability (Langfuse, LangSmith, Phoenix, OTel GenAI, Datadog, Coralogix) | **33%** | `agentic-ai-engineer` | [`mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md`](lessons/mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md) |
+| 6 | Function / tool calling, structured outputs (Pydantic / JSON schema) | **44%** | `agentic-ai-engineer` | [`mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md`](lessons/mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md) |
+| 7 | Model Context Protocol (MCP) — consumption AND authoring | **44%** | `agentic-ai-engineer` | [`mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md`](lessons/mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md) |
+| 8 | API deployment (FastAPI/Flask, REST/GraphQL, async Python, Docker/K8s/IaC, CI/CD) | **78%** | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md`](lessons/mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md) |
+| 9 | Guardrails, prompt injection defense, safety/policy controls, permissions, audit logs | **39%** | `agentic-ai-engineer` (basics) → `ai-infra-security-learning` (depth) | [`mod-206-guardrails-implementation`](lessons/mod-206-guardrails-implementation); deep agent attack surface → `ai-infra-security-learning` (level 35) |
+| 10 | Durable execution / workflow engines (Temporal, Airflow, managed agent runtimes) | 0% | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-02-durable-execution-temporal.md`](lessons/mod-207-productionizing-agents/exercises/exercise-02-durable-execution-temporal.md) |
+| 11 | Cost / latency optimization (prompt caching, model routing, token budgets) | 17% | `agentic-ai-engineer` | [`mod-207-productionizing-agents/exercises/exercise-03-caching-and-routing.md`](lessons/mod-207-productionizing-agents/exercises/exercise-03-caching-and-routing.md) |
+| 14 | Human-in-the-loop oversight / escalation | 6% | `agentic-ai-engineer` | [`mod-206-guardrails-implementation/exercises/exercise-04-human-approval-checkpoints.md`](lessons/mod-206-guardrails-implementation/exercises/exercise-04-human-approval-checkpoints.md), [`mod-207-productionizing-agents/exercises/exercise-04-hitl-with-persistence.md`](lessons/mod-207-productionizing-agents/exercises/exercise-04-hitl-with-persistence.md) |
+| 16 | Voice / realtime / telephony agents | 6% | sub-threshold | External link-outs (below); mod-208 sibling still unwarranted |
+| 18 | AWS-native agent runtime (Bedrock AgentCore, Strands Agents) | 22% | sub-threshold (rising) | [`mod-202-frameworks/exercises/exercise-05-framework-tradeoff-bakeoff.md`](lessons/mod-202-frameworks/exercises/exercise-05-framework-tradeoff-bakeoff.md) — absorbs if it crosses threshold next cycle |
+| 19 | Google ADK + AgentSpace as named production stack | 17% | `agentic-ai-engineer` | Already in mod-202 objectives & exercise-05 comparison scope |
+| 21 | A2A (Agent-to-Agent) protocol — inter-agent communication protocol | 11% | `agentic-ai-engineer` | [`mod-204-multi-agent-implementation`](lessons/mod-204-multi-agent-implementation) — agent-to-agent protocols already in module scope |
+| 22 | "Context engineering" as named discipline distinct from prompt engineering | 17% | `agentic-ai-engineer` | Vocabulary shift, not content shift — surface in mod-201/mod-203 READMEs on next content pass |
 
 ## Posting evidence for load-bearing themes
 
-The table below lists the postings that anchor each ≥30% theme in this window. All 37 sampled postings fall within 2026-05-05 → 2026-08-03.
+The table below lists the postings that anchor each ≥30% theme in this window. All 18 sampled postings fall within 2026-06-05 → 2026-09-03.
 
-### Theme 1 — Agent frameworks (65%)
+### Theme 1 — Agent frameworks (56%)
 
 | Employer | Title | URL | Date observed | Posted |
 |---|---|---|---|---|
-| LTS | Senior Agentic AI Software Engineer | https://job-boards.greenhouse.io/lts/jobs/4340374009 | 2026-08-03 | est:2026-07 |
-| LTS | Senior Applied AI Engineer | https://job-boards.greenhouse.io/lts/jobs/4340498009 | 2026-08-03 | est:2026-07 |
-| Fairmarkit | Agentic AI Engineer | https://job-boards.greenhouse.io/fairmarkit/jobs/6111188004 | 2026-08-03 | est:2026-07 |
-| Snorkel AI | Applied AI Engineer - Enterprise Solutions | https://job-boards.greenhouse.io/snorkelai/jobs/5709067004 | 2026-08-03 | est:2026-07 |
-| Future | Applied AI Engineer | https://job-boards.greenhouse.io/future/jobs/4683133005 | 2026-08-03 | est:2026-07 |
-| Opaque Systems | Forward Deployed Engineer (AI) | https://job-boards.greenhouse.io/opaquesystems/jobs/4235505009 | 2026-08-03 | est:2026-07 |
-| Capco | AI Engineer \| Banking | https://job-boards.greenhouse.io/capco/jobs/8080908 | 2026-08-03 | est:2026-07 |
-| BrightAI | Senior AI Engineer - LLM, RAG | https://job-boards.greenhouse.io/brightai/jobs/5616545004 | 2026-08-03 | est:2026-07 |
-| Taxbit | Agentic AI Engineer | https://job-boards.greenhouse.io/taxbit/jobs/6111141004 | 2026-08-03 | est:2026-07 |
-| Extend | Senior AI Software Engineer, Internal Enablement | https://job-boards.greenhouse.io/extend/jobs/5989772004 | 2026-08-03 | 2026-05-02 |
-| Air | Lead AI Engineer | https://job-boards.greenhouse.io/air/jobs/4114638009 | 2026-08-03 | est:2026-07 |
-| Temporal | Software Engineer II, AI Foundations | https://job-boards.greenhouse.io/temporaltechnologies/jobs/5134414007 | 2026-08-03 | 2026-05-11 |
-| Vercel | Software Engineer, AI SDK | https://job-boards.greenhouse.io/vercel/jobs/5474915004 | 2026-08-03 | est:2026-07 |
-| Accuris | Agentic AI Engineer | https://builtin.com/job/agentic-ai-engineer-remote-6-month-contract/8816631 | 2026-08-03 | est:2026-05 |
-| PayNearMe | Staff SWE - Agent Architecture | https://job-boards.greenhouse.io/paynearmeinc/jobs/4294822009 | 2026-08-03 | est:2026-07 |
-| Splitero | Applied AI Engineer | https://job-boards.greenhouse.io/splitero/jobs/5162723008 | 2026-08-03 | est:2026-07 |
-| Scale AI | Senior Staff Frontier Agents Engineer | https://job-boards.greenhouse.io/scaleai/jobs/4694869005 | 2026-08-03 | est:2026-07 |
-| BLEN | AI Engineer | https://jobs.lever.co/blencorp/4b2e3689-9720-4785-b0fe-d09bd5325f74 | 2026-08-03 | est:2026-06 |
-| Novara | Senior Applied AI Engineer | https://jobs.lever.co/novara/4756bca8-fe07-411f-8904-ec8660090912 | 2026-08-03 | est:2026-06 |
-| Healx | Agentic AI Engineer (Life Sciences) | https://jobs.lever.co/healx/c1dc1b43-066f-427f-a299-0a0b0dc4748f | 2026-08-03 | est:2026-06 |
-| Jobgether | AI Product Engineer | https://jobs.lever.co/jobgether/c53ae155-a701-4cb7-95b4-1c68791290d0 | 2026-08-03 | est:2026-06 |
-| Planera | Senior AI Agent Engineer | https://jobs.ashbyhq.com/planera/d68c8a09-a11d-409e-85ca-5d434caf3fc8 | 2026-08-03 | 2026-06-29 |
-| Capstone Investment Advisors | AI Infrastructure Engineer | https://job-boards.greenhouse.io/capstoneinvestmentadvisors/jobs/8427813002 | 2026-08-03 | est:2026-07 |
-| Pipe17 | Junior SWE, AI-Native | https://job-boards.greenhouse.io/pipe17/jobs/4717950005 | 2026-08-03 | est:2026-07 |
+| Future | Applied AI Engineer | https://job-boards.greenhouse.io/future/jobs/4683133005 | 2026-09-03 | est:2026-08 |
+| Cloud202 | AI Engineer | https://www.gravityer.com/jobs/ai-engineer-cloud202 | 2026-09-03 | 2026-06-02 |
+| Cognitive Space | AI Engineer — Agentic Workflows | https://jobs.techstars.com/companies/cognitive-space/jobs/67412130-ai-engineer-agentic-workflows | 2026-09-03 | est:2026-07 |
+| Netomi | Staff Agentic AI Engineer | https://jobs.lever.co/netomi/3fe31ab4-1e79-4b1c-8493-dfec68e69ba7 | 2026-09-03 | est:2026-08-06 |
+| Sharebite | AI Engineer | https://job-boards.greenhouse.io/sharebite/jobs/5848230004 | 2026-09-03 | est:2026-08 |
+| TTEC | Agentic AI Engineer (Google ADK) | https://ph.talent.com/view?id=629808943968619465 | 2026-09-03 | est:2026-08 |
+| Realtech Services | Gen AI Engineer — Google ADK & Agentic AI | https://www.dice.com/job-detail/ef9b17af-409d-402d-b552-4d2976bfa1f2 | 2026-09-03 | est:2026-07 |
+| Taller | Agentic AI Engineer | https://builtin.com/job/102735-agentic-ai-engineer/10537194 | 2026-09-03 | est:2026-07 |
+| Vercel | Software Engineer, AI SDK | https://vercel.com/careers/software-engineer-ai-sdk-5474915004 | 2026-09-03 | est:2026-08-27 |
+| Planera | Senior AI Agent Engineer | https://jobs.ashbyhq.com/planera/d68c8a09-a11d-409e-85ca-5d434caf3fc8 | 2026-09-03 | 2026-06-29 |
 
-Representative quote: *"plugin system that makes it easy to add Temporal's durable execution to popular open source agent frameworks such as Pydantic AI, AI SDK by Vercel, Google ADK, OpenAI Agents SDK"* — Temporal Technologies.
+Representative quote: *"Evaluate Deep Agent, Claude Agent, OpenAI Agent, LangGraph, and other emerging agent orchestration patterns"* — Netomi.
 
-→ Covered by [`mod-202-frameworks`](lessons/mod-202-frameworks): builds the same agent across LangGraph, CrewAI, and AutoGen; benchmarks OpenAI Agents SDK, Google ADK, Anthropic Agent SDK, and smolagents in `exercise-05-framework-tradeoff-bakeoff`. Pydantic AI + Vercel AI SDK can be woven into the comparison on the next content pass — no delta needed.
+→ Covered by [`mod-202-frameworks`](lessons/mod-202-frameworks). Strands Agents and Google ADK can be woven into `exercise-05-framework-tradeoff-bakeoff` on the next content pass — no delta needed.
 
-### Theme 2 — RAG, vector DBs, memory (49%)
+### Theme 2 — RAG, vector DBs, memory (56%)
 
-Anchored by LTS×2, Snorkel, Rackner, Mercury, WITHIN, Future, Cadence, Opaque, BrightAI, EvolutionIQ, BLEN, Scale AI, SecurityScorecard, Splitero, Xaira, Healx, Tessera. Named stacks: pgvector, Pinecone, Weaviate, Qdrant, Milvus, FAISS, Chroma, Azure AI Search.
+Anchored by Future, Cloud202, Cognitive Space, Netomi, Cbase, Sharebite, EvolutionIQ, Realtech, DeepSeas, APAS. Named tools consistent with prior cycle: pgvector, Pinecone, Weaviate, Qdrant, FAISS, Chroma.
 
-Representative quote: *"Deep hands-on experience with RAG pipeline design: chunking strategies, embedding models, vector databases, retrieval quality evaluation, re-ranking."* — Opaque Systems.
+Representative quote: *"Hands-on experience implementing RAG architectures and vector search solutions"* — Realtech Services.
 
 → Covered by [`mod-203-rag-and-memory`](lessons/mod-203-rag-and-memory).
 
-### Theme 3 — Multi-agent orchestration (32%)
+### Theme 3 — Multi-agent orchestration (50%)
 
-Anchored by Fairmarkit, Opaque, Capco, Air, Taxbit, Cadence, Xaira, SecurityScorecard, Tessera, Jobgether, Novara, Healx.
+Anchored by iCapital, Cloud202, Cognitive Space, Netomi, Cbase, TTEC, Realtech, Taller, Accenture.
 
-Representative quote: *"designing and implementing complex, multi-agent state machines and stateful graphs using LangGraph and LangChain"* — Novara.
+Representative quote: *"Deep understanding of multi-agent orchestration patterns, state graph architectures, and deterministic routing"* — TTEC.
 
-→ Covered by [`mod-204-multi-agent-implementation`](lessons/mod-204-multi-agent-implementation). Agent-to-agent protocols (Jobgether) fit exercise-02-agent-handoffs. Higher-altitude architecture stays with `agentic-systems-architect-learning` (level 48).
+→ Covered by [`mod-204-multi-agent-implementation`](lessons/mod-204-multi-agent-implementation). A2A protocol (Cloud202) fits `exercise-02-agent-handoffs`. Higher-altitude architecture stays with `agentic-systems-architect-learning` (level 48).
 
-### Theme 4 — Evaluation harnesses (46%)
+### Theme 4 — Evaluation harnesses (56%)
 
-Anchored by Honeycomb, Snorkel, Mercury, Rackner, Future, Opaque, Taxbit, Air, Gradial, Splitero, RxSense, Dialpad, Planera, Jobgether, Tessera, EvolutionIQ, PayNearMe.
+Anchored by Future, Cloud202, Cognitive Space, Netomi, Cbase, Sharebite, EvolutionIQ, Realtech, TTEC, Planera.
 
-Representative quote: *"evals into the CI/CD pipeline so no agent or LLM-powered service ships without passing a defined eval bar"* — RxSense.
+Representative quote: *"Experience developing AI evaluation systems, including LLM-as-judge, guardrail evaluation, regression testing, and production quality measurement"* — Netomi.
 
-→ Covered by [`mod-205-evaluation-observability`](lessons/mod-205-evaluation-observability). SWE-bench / TAU-bench (Gradial) sub-threshold; can be mentioned in exercise-04-agent-regression-suite on next content pass.
+→ Covered by [`mod-205-evaluation-observability`](lessons/mod-205-evaluation-observability). AgentCore Evaluations (Cloud202) is the AWS-native flavor of the same pattern — no separate coverage needed.
 
-### Theme 6 — Function / tool calling, structured outputs (35%)
+### Theme 5 — Observability (33%)
 
-Anchored by LTS×2, WITHIN, Air, Accuris, BLEN, Cadence, Opaque, Taxbit, Xaira, Tessera, Healx, Snorkel.
+Just crossed the threshold this cycle (was 27% prior). Anchored by Future (Langfuse + OTel + Datadog), Cognitive Space (tracing, tool-call success rates), Netomi, Cbase, Cloud202 (AgentCore Evaluations), Sharebite.
 
-Representative quote: *"Tool/function calling and Structured outputs (JSON schema)"* — WITHIN.
+Representative quote: *"Establish observability for agent runs (tracing, failure analysis, latency/cost monitoring, tool-call success rates)"* — Cognitive Space.
+
+→ Covered by [`mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md`](lessons/mod-205-evaluation-observability/exercises/exercise-02-otel-tracing-wireup.md). Langfuse + OTel GenAI are already the canonical stack in the exercise.
+
+### Theme 6 — Function / tool calling, structured outputs (44%)
+
+Anchored by Future, Cognitive Space, Netomi, TTEC, Realtech, Accenture, Cbase, Cloud202.
+
+Representative quote: *"Implement and maintain a robust tool interface layer (tool schemas/contracts, structured I/O, validation, retries)"* — Cognitive Space.
 
 → Covered by [`mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md`](lessons/mod-201-agent-fundamentals/exercises/exercise-02-function-calling-tools.md).
 
-### Theme 8 — API deployment / backend / containerization (46%)
+### Theme 7 — MCP (44%)
 
-Anchored by LTS×2, WITHIN, Future, BLEN, Fairmarkit, Scale AI, SecurityScorecard, Air, Splitero, Extend, Capstone, Novara, Rackner, EvolutionIQ, Vercel, Pipe17.
+Anchored by Cloud202, Netomi, Cbase, TTEC, Taller, Planera, Cognitive Space, Sharebite. Postings continue to shift from *consuming* MCP tools to *authoring* MCP servers wrapped around enterprise systems.
 
-Representative quote: *"Comfort with async Python, HTTP APIs, and streaming protocols (SSE, webhooks)."* — Future.
+Representative quote: *"Implement and extend Model Context Protocol (MCP) servers and clients to integrate enterprise tools"* — Cbase.
 
-→ Covered by [`mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md`](lessons/mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md). IaC (Terraform, CDK) surfacing more but stays owned by `ai-infra-platform-engineer-learning` per hierarchy.
+→ Covered by [`mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md`](lessons/mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md), which includes an authoring lab. **Watchpoint:** the 2026-07-28 MCP spec now mandates OAuth 2.1 + PKCE + RFC 8707 Resource Indicators for remote MCP servers; that language has not yet surfaced in job requirements but is the highest-probability next-cycle signal. If MCP-authoring-with-enterprise-auth crosses 30% next cycle, propose a second MCP exercise focused on auth-wrapped MCP servers.
 
-### Theme 9 — Guardrails / security / compliance (32%) — climbed from 18% but still fully covered
+### Theme 8 — API deployment / backend / containerization (78%)
 
-Anchored by Extend, Opaque, Capstone, Rackner, Mercury, Taxbit, Xaira, Jobgether, RxSense, Accuris, SecurityScorecard, Healx.
+Sample-composition effect: this cycle's sample skews toward postings that explicitly named cloud/DevOps stacks. Anchored by Future, Cloud202, Cognitive Space, Netomi, Cbase, Sharebite, EvolutionIQ, TTEC, Realtech, CrowdStrike, Accenture, Vercel, Planera, iCapital.
 
-Representative quote: *"Experience with LLM application security: OWASP LLM Top 10, prompt injection defense, agent sandboxing."* — Extend.
+Representative quote: *"Deploy and operate AI agents securely at scale with serverless infrastructure"* — Cloud202.
 
-→ Covered by [`mod-206-guardrails-implementation`](lessons/mod-206-guardrails-implementation): four exercises cover I/O moderation, prompt-injection defenses (OWASP LLM01), tool-permission enforcement, human-approval checkpoints. Deep depth stays with `ai-infra-security-learning` (level 35).
+→ Covered by [`mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md`](lessons/mod-207-productionizing-agents/exercises/exercise-01-agent-api-deployment.md). IaC (Terraform, CDK) surfaces alongside deployment but stays owned by `ai-infra-platform-engineer-learning` per hierarchy.
 
-**Continuity-bias check:** the theme frequency climbs from 18% → 32%, crossing the threshold. But the four existing mod-206 exercises collectively cover every named sub-theme observed. The strongest *emerging* sub-theme is **credential management for agents** (OAuth 2.0/OIDC, API key vending, secret rotation, RBAC) — cited by only 3 postings (Extend, Capstone, Accuris) = 8% frequency. Sub-threshold. If credential-mgmt + enterprise-auth crosses 30% next cycle, propose a mod-206 exercise-05 addition then.
+### Theme 9 — Guardrails / safety / policy (39%) — climbed from 32%, still fully covered
+
+Anchored by Cognitive Space (permissions, policy checks, audit logs), Netomi, Cbase, TTEC, Taller, Realtech (governance/compliance), Accenture.
+
+Representative quote: *"Implement safety and governance controls (permissions, policy checks, audit logs)"* — Cognitive Space.
+
+→ Covered by [`mod-206-guardrails-implementation`](lessons/mod-206-guardrails-implementation): four exercises cover I/O moderation, prompt-injection defenses (OWASP LLM01), tool-permission enforcement, human-approval checkpoints.
+
+**Continuity-bias check:** the theme frequency climbed from 32% → 39%. The named sub-themes (permissions, policy-as-code, audit logs, prompt injection defense) remain covered by mod-206's four existing exercises. The credential-management sub-theme (OAuth 2.0/OIDC, API key vending, RBAC) actually held flat at 6% this cycle despite the 2026-07-28 MCP spec change mandating OAuth 2.1 + PKCE + RFC 8707 for remote MCP servers. Requirement wording lags spec changes — expect this to surface in the next cycle. If credential-mgmt + enterprise-auth crosses 30% next cycle, propose a mod-206 exercise-05 addition then.
 
 ## Themes just below threshold this cycle
 
-### Theme 7 — MCP (27%)
+### Theme 18 — AWS-native agent stack (22%) — rising fast
 
-Anchored by Mercury, Extend, Pipe17, Capstone, Accuris, BLEN, Novara, Healx, Jobgether, Planera.
+Cloud202 (full Bedrock AgentCore + Strands Agents stack), Cognitive Space ("LangChain/Strands/Bedrock"), Cbase ("AWS Agent Core or similar"), Sharebite ("LangChain, LangGraph, or AWS Bedrock").
 
-Representative quote: *"Build and maintain Model Context Protocol (MCP) services and supporting infrastructure."* — Capstone Investment Advisors.
+Climbed 3% → 22% this cycle. If it hits 30% next cycle, mod-202/exercise-05-framework-tradeoff-bakeoff absorbs Strands/AgentCore into the comparison — no new module needed. AgentCore Evaluations is a rebranding of standard eval workflows and does not require separate curriculum coverage.
 
-Dropped from baseline 32% → 27% (denominator effect only — absolute count went 7 → 10). Postings are shifting from *consuming* MCP tools to *authoring* MCP servers, often wrapping legacy REST APIs behind enterprise auth.
+### Theme 19 — Google ADK + AgentSpace (17%)
 
-→ Already covered by [`mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md`](lessons/mod-202-frameworks/exercises/exercise-04-mcp-tool-server.md), which includes an authoring lab. If MCP-authoring-with-enterprise-auth crosses 30% next cycle, propose a second MCP exercise focused on auth-wrapped MCP servers. Deep "MCP attack surface" is owned by `ai-infra-security-learning`.
+TTEC ("official open-source Google Agent Development Kit"), Realtech, Taller ("Google Agentic Orchestration").
 
-### Theme 5 — Observability (27%)
+Climbed 8% → 17%. Still below threshold. ADK is already listed in mod-202 objectives and exercise-05 comparison scope.
 
-Consistent with baseline. Langfuse and OTel GenAI both explicitly named. Covered by exercise-02-otel-tracing-wireup.
+### Theme 21 — A2A (Agent-to-Agent) protocol (11%) — new signal
+
+Cloud202 explicit: *"Build inter-agent communication systems using A2A protocol for peer-to-peer agent collaboration."* Netomi and Cbase use supporting language.
+
+New named requirement this cycle. mod-204 already covers agent-to-agent protocols generically. Watch for A2A 1.0 spec to enter requirements next cycle.
+
+### Theme 22 — "Context engineering" as named discipline (17%) — new vocabulary
+
+iCapital ("context engineering"), DeepSeas ("Strong context engineering skills. Able to curate, compress, and structure large datasets"), Anthropic Applied AI (cross-reference).
+
+Vocabulary shift, not content shift. Falls inside the prompt-design + retrieval-shaping + memory-curation loop already taught in mod-201 (prompt design) and mod-203 (retrieval + memory). Surface the term in mod-201 README on next content pass.
 
 ## Sub-threshold new signals — tracked for next cycle
 
-### AI-assisted dev-tool fluency (14%) — new signal
+### Voice / realtime / telephony agents — 6% (flat)
 
-Employers now write "daily fluency with Claude Code / Cursor / Copilot" into requirements as a work-style expectation, not a technical build skill. Cited by Pipe17, Splitero, SecurityScorecard, Air, Extend.
-
-*Not curriculum-worthy for the agent-build track.* Surface as a repo-wide prerequisites expectation if it crosses 40%+ next cycle.
-
-### AWS-native agent runtime (3%) — new signal
-
-Only Taxbit fully names the Strands Agents / AgentCore / Bedrock AgentCore stack this window. If ≥3 more postings appear, `mod-202/exercise-05-framework-tradeoff-bakeoff` can absorb by adding Strands/AgentCore to the comparison — no new module needed.
-
-### Google ADK + AgentSpace as named stack (8%) — new signal
-
-Cited by Capco, Healx, and Temporal (as plugin target). ADK is already listed in `mod-202` objectives and `exercise-05` comparison scope — coverage stands.
-
-### Voice / realtime / telephony agents — 5% (flat)
-
-Anchored by PayNearMe (LangGraph + ElevenLabs + Twilio, voice-first agent architecture) and Dialpad (NVIDIA NeMo, ESPnet, Coqui, ElevenLabs, Rime, Cartesia — TTS-quality tier). Named vendor stack has crystallized this window even though posting count is flat.
+Carbon Technology's *"Senior Voice AI Engineer (Founding Team)"* is the only anchor in-window. Voice work continues to cordon off into specialty *Voice AI Engineer* titles rather than surfacing in general Agentic AI Engineer requirements — the previously-set "cross 15% justifies mod-208" trigger did not fire.
 
 External resources for learners interested now:
 - LiveKit Agents — https://docs.livekit.io/agents
@@ -182,33 +180,24 @@ External resources for learners interested now:
 - ElevenLabs — https://elevenlabs.io/docs
 - Cartesia — https://docs.cartesia.ai
 
-If posting count reaches ≥ 3 in a future cycle *and* frequency crosses 15%, propose a `mod-208-voice-agents` sibling.
+### Code / computer-use agents — did not resample separately this cycle
 
-### Code / computer-use agents — 19% (flat)
-
-Anchored by Pipe17, Splitero, SecurityScorecard, Air, Extend (Claude Code as build target), plus Gradial (SFT/RL for tool-using coding agents) and Temporal (Codex / Claude Code integration). `mod-201/exercise-03-coding-agent-read-write-execute` already covers build-altitude basics. Computer-use depth stays out-of-scope link-outs:
+Coverage stands at mod-201/exercise-03 for build-altitude basics; computer-use depth remains out-of-scope link-outs:
 - Anthropic Computer Use — https://docs.anthropic.com/en/docs/build-with-claude/computer-use
 - e2b sandbox — https://e2b.dev/docs
 - Modal sandboxes — https://modal.com/docs/guide/sandbox
 - BrowserBase — https://docs.browserbase.com
-- Daytona sandboxes — https://www.daytona.io/docs
-- SWE-bench — https://www.swebench.com
-- TAU-bench — https://github.com/sierra-research/tau-bench
 
-### Agent modeling / post-training — 16% (owned elsewhere)
+### Agent modeling / post-training — remains owned elsewhere
 
-Cadence, Gradial, BrightAI, Xaira, EvolutionIQ, Capco cite fine-tuning / SFT / RLHF / LoRA. Owned by `ai-infra-ml-platform-learning` (level 30).
+Fine-tuning / SFT / RLHF / LoRA mentions stay owned by `ai-infra-ml-platform-learning` (level 30). No change.
 
-### Forward-deployed / customer-facing — 5% (down from baseline)
+### AI-assisted developer-tool fluency — 6% (down from 14%)
 
-Opaque Systems FDE (AI) is the only clear FDE-titled posting this window. Still a process pattern, not a curriculum module. Surface in `project-201-production-multi-agent-system` capstone README.
-
-### Low-code orchestration (n8n / Make / Zapier) — 5% (new signal)
-
-Splitero and Jobgether mention n8n/Make specifically for Applied-AI-Engineer-flavored roles. Not curriculum-worthy for the build-altitude agent-engineering track.
+Only Netomi (Staff level) explicitly named daily use of Codex/Claude Code/Cursor as a requirement this cycle. This remains a work-style expectation, not a curriculum-worthy build skill.
 
 ## Conclusion
 
-<!-- needs-research: monitor guardrails/credential-management + MCP-authoring frequencies in the next cycle; if credential-mgmt crosses 30% or MCP-authoring hits 40%+, propose mod-206 exercise-05 and/or a second MCP exercise. Also monitor voice-agent and AWS-native-agent-stack posting counts — either could become module-worthy. -->
+<!-- needs-research: monitor MCP-authoring-with-OAuth-2.1 requirement wording in the next cycle following the 2026-07-28 MCP spec change; monitor AWS Bedrock AgentCore + Strands Agents (currently 22%, rising fast) — if either crosses 30%, propose a mod-206 exercise-05 (auth-wrapped MCP) or a mod-202 exercise-05 addendum (Strands/AgentCore in the comparison). -->
 
-The Agentic AI Engineer curriculum (mod-201..207 plus `project-201-production-multi-agent-system` and `project-202-benchmark-agent`) covers every job-market requirement that clears the continuity-bias thresholds. **No delta is proposed this cycle.** Re-run on the next quarterly cycle (2026-11) to catch shifts in guardrails/credential-mgmt, MCP-authoring, and voice/computer-use agent demand.
+The Agentic AI Engineer curriculum (mod-201..207 plus `project-201-production-multi-agent-system` and `project-202-benchmark-agent`) covers every job-market requirement that clears the continuity-bias thresholds. **No delta is proposed this cycle** — this is the second consecutive zero-additions refresh (2026-08-03 and 2026-09-03). Re-run on the next quarterly cycle (2026-12) to catch the delayed language propagation from the 2026-07-28 MCP OAuth-2.1 spec change and to check whether AWS Bedrock AgentCore + Strands Agents has crossed the 30% frequency threshold.
