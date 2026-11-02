@@ -138,6 +138,50 @@
       ],
       "labs": [],
       "quizzes": 1
+    },
+    {
+      "id": "mod-208-harness-engineering",
+      "title": "Harness Engineering",
+      "hours": 10,
+      "objectives": [
+        "Explain the harness model: inner vs outer harness, guides vs sensors, computational vs inferential controls",
+        "Write instruction files (AGENTS.md/CLAUDE.md) and skills that work as a map, using progressive disclosure",
+        "Enforce rules deterministically with permissions, sandboxing, and lifecycle hooks",
+        "Evaluate harness changes with fixed task sets, repeated trials, and pass rate/cost/turns",
+        "Structure long-running work across sessions with an initializer, JSON feature list, and progress file"
+      ],
+      "exercises": [
+        {"id": "exercise-01", "slug": "harness-a-repository", "hours": 3},
+        {"id": "exercise-02", "slug": "guardrail-hooks", "hours": 3},
+        {"id": "exercise-03", "slug": "harness-eval", "hours": 3}
+      ],
+      "labs": [],
+      "quizzes": 1
+    },
+    {
+      "id": "mod-209-building-custom-harnesses",
+      "title": "Building a Custom Agent Harness",
+      "hours": 24,
+      "objectives": [
+        "Decide when to build vs configure, and design harness architecture: core types, event bus, pluggable model/sandbox/front end",
+        "Build the agent loop with validation, errors as observations, hooks, a permission gate, and stop conditions",
+        "Design coding tools for a model: paged reads, exact-match edits with read-before-edit, glob/grep, scrubbed command execution",
+        "Isolate execution with a threat model, container runner, no-network defaults, and git checkpoints",
+        "Manage context and sessions: token accounting, tool-result clearing, compaction, resumable on-disk state",
+        "Assemble cache-friendly system prompts from instruction files and skills; harden the model layer with retries, streaming, and parallel reads",
+        "Extend the harness with subagents, MCP servers, and validated layered config",
+        "Operate and ship it: redacted event logs, OpenTelemetry spans, record-and-replay tests, headless CLI"
+      ],
+      "exercises": [
+        {"id": "exercise-01", "slug": "build-a-minimal-harness", "hours": 4},
+        {"id": "exercise-02", "slug": "coding-tool-suite", "hours": 4},
+        {"id": "exercise-03", "slug": "prompt-assembly-and-model-layer", "hours": 3},
+        {"id": "exercise-04", "slug": "context-and-session-state", "hours": 3},
+        {"id": "exercise-05", "slug": "subagents-mcp-and-config", "hours": 4},
+        {"id": "exercise-06", "slug": "observability-replay-and-shipping", "hours": 3}
+      ],
+      "labs": [],
+      "quizzes": 1
     }
   ],
   "projects": [
