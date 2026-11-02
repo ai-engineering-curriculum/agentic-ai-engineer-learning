@@ -25,7 +25,7 @@ Build on your [exercise-01](exercise-01-build-a-minimal-harness.md) harness or i
 
 ### 1. `read_file` with line numbers and paging
 
-- Return content with line numbers (`   12\t<line>`), so the model can refer to exact lines.
+- Return content with line numbers (a right-aligned number, a tab, then the line, like `cat -n`), so the model can refer to exact lines.
 - Accept `offset` and `limit` (default limit 2,000 lines). When a file is cut, end with a note saying how to read the rest.
 - Truncate very long single lines (say, over 2,000 characters) with a marker.
 - Detect binary files and return a short description instead of their bytes.
