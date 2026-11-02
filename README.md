@@ -16,7 +16,7 @@ Build production multi-agent systems from the loop up: agent fundamentals, frame
 
 ## 🎯 Overview
 
-This is the **build-altitude** rung of the agentic track (level 30). Where the [Agentic AI Developer](https://github.com/ai-engineering-curriculum/agentic-ai-developer-learning) rung gets you *using* agents, this track gets you *building and operating* them. Across seven modules you'll implement the reason-act loop by hand, drive real frameworks (LangGraph, CrewAI, AutoGen), ground agents with retrieval and memory, coordinate multi-agent systems, instrument evaluation and tracing, wrap the whole thing in guardrails, and ship it behind a durable, cost-aware API.
+This is the **build-altitude** rung of the agentic track (level 30). Where the [Agentic AI Developer](https://github.com/ai-engineering-curriculum/agentic-ai-developer-learning) rung gets you *using* agents, this track gets you *building and operating* them. Across nine modules you'll implement the reason-act loop by hand, drive real frameworks (LangGraph, CrewAI, AutoGen), ground agents with retrieval and memory, coordinate multi-agent systems, instrument evaluation and tracing, wrap the whole thing in guardrails, ship it behind a durable, cost-aware API, engineer the harness that coding agents run in, and then build a production-grade harness of your own.
 
 Every module is hands-on. You write the coordination logic before you trust a framework to do it, and you measure agent behavior — the *trajectory*, not just the final answer — so "it feels better" becomes a number you can gate on in CI.
 
@@ -29,6 +29,8 @@ Every module is hands-on. You write the coordination logic before you trust a fr
 - Instrument trajectory evals, OpenTelemetry GenAI tracing, LLM-as-judge scoring, and CI regression suites.
 - Defend agents with input/output moderation, prompt-injection defenses, least-privilege tool permissions, and human-approval checkpoints.
 - Productionize agents with FastAPI services, durable execution (Temporal), prompt caching, model routing, and persisted human-in-the-loop state.
+- Engineer agent harnesses: configure Claude Code or Codex with instruction files, skills, permissions, and hooks, and measure harness changes with evals.
+- Build a custom agent harness end to end: coding tools, sandboxed execution with checkpoints, context compaction, cache-aware prompt assembly, subagents, MCP, tracing, replay tests, and a headless CLI.
 
 ---
 
@@ -43,8 +45,10 @@ Every module is hands-on. You write the coordination logic before you trust a fr
 | [mod-205](./lessons/mod-205-evaluation-observability/README.md) | Evaluation & Observability Instrumentation | 10h | 4 | ✅ |
 | [mod-206](./lessons/mod-206-guardrails-implementation/README.md) | Guardrails & Safety Implementation | 10h | 4 | ✅ |
 | [mod-207](./lessons/mod-207-productionizing-agents/README.md) | Productionizing Agents | 12h | 4 | Planned |
+| [mod-208](./lessons/mod-208-harness-engineering/README.md) | Harness Engineering | 10h | 3 | Planned |
+| [mod-209](./lessons/mod-209-building-custom-harnesses/README.md) | Building a Custom Agent Harness | 24h | 6 | Planned |
 
-**Total:** 7 modules · 82 module hours · 29 exercises.
+**Total:** 9 modules · 116 module hours · 38 exercises.
 
 ---
 
@@ -141,6 +145,18 @@ Build the safety layer around the agent. Add input/output moderation and per-too
 Bridge from "works on my laptop" to "serves traffic." Put an agent behind a FastAPI service and containerize it, make long runs durable with Temporal, cut cost and tail latency with prompt caching and model routing, and add human-in-the-loop gates whose state survives across the wait.
 
 [View module →](./lessons/mod-207-productionizing-agents/README.md)
+
+### mod-208 — Harness Engineering
+
+An agent is a model plus a harness, and much of an agent's reliability comes from the harness. Configure an existing coding agent for a real repository: instruction files as a map, skills, permission policies and sandboxing, hooks that enforce rules deterministically, long-running session patterns, and an eval runner that tells you whether a harness change helped.
+
+[View module →](./lessons/mod-208-harness-engineering/README.md)
+
+### mod-209 — Building a Custom Agent Harness
+
+Build a harness with the same parts as Claude Code or Codex CLI, one layer per exercise: the loop and permission gate; a coding tool suite with exact-match edits; container sandboxing and git checkpoints; context clearing, compaction, and resumable session state; cache-aware prompt assembly and a retrying, streaming model layer; subagents, MCP, and declarative config; and redacted run logs, OpenTelemetry tracing, record-and-replay tests, and a headless CLI.
+
+[View module →](./lessons/mod-209-building-custom-harnesses/README.md)
 
 ---
 
