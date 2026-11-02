@@ -1,8 +1,8 @@
 # mod-209-building-custom-harnesses: Building a Custom Agent Harness
 
-**Estimated effort:** 24 hours
+**Estimated effort:** 27 hours
 
-In [mod-208](../mod-208-harness-engineering/README.md) you configured a harness someone else built. In this module you build one, with the same parts as Claude Code or Codex CLI. You start from the loop and add a coding tool suite, an OS-level sandbox with undoable checkpoints, context management, prompt assembly, a resilient model layer, subagents, MCP, declarative config, tracing, replay tests, and a headless CLI. Each exercise adds one layer to the same codebase. By the end you'll have a harness you could ship, and you'll understand the harnesses you use every day well enough to configure, debug, and extend them.
+In [mod-208](../mod-208-harness-engineering/README.md) you configured a harness someone else built. In this module you build one, with the same parts as Claude Code or Codex CLI. You start from the loop and add a coding tool suite, an OS-level sandbox with undoable checkpoints, context management, prompt assembly, a resilient model layer, subagents, MCP, declarative config, tracing, replay tests, a headless CLI, and an external trust layer. Each exercise adds one layer to the same codebase. By the end you'll have a harness you could ship, and you'll understand the harnesses you use every day well enough to configure, debug, and extend them.
 
 > **The harness enforces; the prompt requests.** Every chapter comes back to this. A rule the model must follow belongs in code or at the OS level. The prompt explains the rule so the model doesn't waste turns running into it.
 
@@ -16,6 +16,7 @@ In [mod-208](../mod-208-harness-engineering/README.md) you configured a harness 
 - **Assemble the system prompt** from instruction files, skills, and the environment, laid out for prompt caching; and **harden the model layer** with retries, streaming, and parallel read-only tool calls.
 - **Make the harness extensible** with subagents, MCP servers, and validated layered config.
 - **Operate and ship it**: event logs with redaction, OpenTelemetry spans, record-and-replay tests, and a headless CLI with JSON output and meaningful exit codes.
+- **Add a trust layer**: route side-effecting tool decisions through an external policy service, keep PII out of the model's context, scan untrusted output, and stream behavioral events for scoring and audit, with deliberate fail-open and fail-closed choices.
 
 ## Lecture chapters
 
@@ -27,10 +28,11 @@ In [mod-208](../mod-208-harness-engineering/README.md) you configured a harness 
 6. [Prompt Assembly and the Model Layer](06-prompt-assembly-and-model-layer.md) — building the system prompt, instruction discovery, skills index, prompt caching, retries, streaming, and parallel tools.
 7. [Subagents, Skills, and MCP](07-subagents-skills-mcp.md) — delegation with isolation, agent definitions, MCP client integration and its risks, and declarative config.
 8. [Observability, Testing, and Shipping](08-observability-testing-shipping.md) — events, run logs, tracing, three levels of testing, front ends, headless defaults, exit codes, cost, and packaging.
+9. [Adding a Trust Layer: VeriSwarm](09-trust-layer-veriswarm.md) — what a harness can't do alone, Gate decisions as a permission source, fail modes, events for scoring and audit, PII tokenization and injection scanning, identity, and the vendor-neutral pattern.
 
 ## Exercises
 
-Every exercise builds on [exercise-01](exercises/exercise-01-build-a-minimal-harness.md). Exercises 02–06 each extend exercise-01 on their own, so you can do them in any order after it. Reference solutions live in the paired [solutions repo](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-solutions).
+Every exercise builds on [exercise-01](exercises/exercise-01-build-a-minimal-harness.md). Exercises 02–07 each extend exercise-01 on their own, so you can do them in any order after it. Reference solutions live in the paired [solutions repo](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-solutions).
 
 - [exercise-01: Build a minimal harness](exercises/exercise-01-build-a-minimal-harness.md) — the loop, tool registry, permission gate, hooks, and stop conditions from scratch. *(4h)*
 - [exercise-02: A coding tool suite with isolated execution](exercises/exercise-02-coding-tool-suite.md) — paged reads, exact-match edits, search, a Docker runner, and git checkpoints. *(4h)*
@@ -38,6 +40,7 @@ Every exercise builds on [exercise-01](exercises/exercise-01-build-a-minimal-har
 - [exercise-04: Context management and session state](exercises/exercise-04-context-and-session-state.md) — clearing, compaction, and a guarded feature list and progress file for multi-session work. *(3h)*
 - [exercise-05: Subagents, MCP tools, and declarative config](exercises/exercise-05-subagents-mcp-and-config.md) — a `task` tool, an MCP client adapter, and settings-driven permissions and hooks. *(4h)*
 - [exercise-06: Observability, replay testing, and shipping](exercises/exercise-06-observability-replay-and-shipping.md) — JSONL run logs, OpenTelemetry spans, record and replay, and a headless CLI. *(3h)*
+- [exercise-07: Add a trust layer with VeriSwarm](exercises/exercise-07-trust-layer-veriswarm.md) — Gate as a permission policy, result and input filter stages, PII tokenization and rehydration, injection scanning, and batched behavioral events. *(3h)*
 
 ## Prerequisites
 
