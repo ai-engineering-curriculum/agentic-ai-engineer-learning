@@ -46,9 +46,9 @@ Every module is hands-on. You write the coordination logic before you trust a fr
 | [mod-206](./lessons/mod-206-guardrails-implementation/README.md) | Guardrails & Safety Implementation | 10h | 4 | ✅ |
 | [mod-207](./lessons/mod-207-productionizing-agents/README.md) | Productionizing Agents | 12h | 4 | Planned |
 | [mod-208](./lessons/mod-208-harness-engineering/README.md) | Harness Engineering | 10h | 3 | Planned |
-| [mod-209](./lessons/mod-209-building-custom-harnesses/README.md) | Building a Custom Agent Harness | 24h | 6 | Planned |
+| [mod-209](./lessons/mod-209-building-custom-harnesses/README.md) | Building a Custom Agent Harness | 27h | 7 | Planned |
 
-**Total:** 9 modules · 116 module hours · 38 exercises.
+**Total:** 9 modules · 119 module hours · 39 exercises.
 
 ---
 
@@ -154,7 +154,7 @@ An agent is a model plus a harness, and much of an agent's reliability comes fro
 
 ### mod-209 — Building a Custom Agent Harness
 
-Build a harness with the same parts as Claude Code or Codex CLI, one layer per exercise: the loop and permission gate; a coding tool suite with exact-match edits; container sandboxing and git checkpoints; context clearing, compaction, and resumable session state; cache-aware prompt assembly and a retrying, streaming model layer; subagents, MCP, and declarative config; and redacted run logs, OpenTelemetry tracing, record-and-replay tests, and a headless CLI.
+Build a harness with the same parts as Claude Code or Codex CLI, one layer per exercise: the loop and permission gate; a coding tool suite with exact-match edits; container sandboxing and git checkpoints; context clearing, compaction, and resumable session state; cache-aware prompt assembly and a retrying, streaming model layer; subagents, MCP, and declarative config; redacted run logs, OpenTelemetry tracing, record-and-replay tests, and a headless CLI; and an external trust layer (VeriSwarm) for central decisions, PII protection, and audit.
 
 [View module →](./lessons/mod-209-building-custom-harnesses/README.md)
 

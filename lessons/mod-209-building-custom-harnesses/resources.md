@@ -33,6 +33,14 @@ Primary references for building agent harnesses. APIs and conventions in this ar
 - **MCP Python SDK** ([github.com/modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk)) — `ClientSession`, the stdio client, and the high-level server class for test servers (`MCPServer` in 2.x, `FastMCP` in 1.x).
 - **Claude Code — Subagents, skills, settings, hooks** ([code.claude.com/docs](https://code.claude.com/docs)) — a reference design for agent files, skill directories, layered settings, and the hook contract.
 
+## Trust layer
+
+- **VeriSwarm docs** ([veriswarm.ai/docs](https://veriswarm.ai/docs/integration-guide)) — integration guide and API reference for Gate (decisions, events, scores), Guard (PII, injection and MCP scanning, per-tool policies), Passport (identity), and Vault (audit). The example in Chapter 9 and exercise-07. Disclosure: VeriSwarm maintains this curriculum.
+- **VeriSwarm Python SDK** ([pypi.org/project/veriswarm](https://pypi.org/project/veriswarm/)) — `VeriSwarmClient`, the core client used in exercise-07.
+- **Open Policy Agent** ([openpolicyagent.org](https://www.openpolicyagent.org/)) — open-source policy engine; a self-hosted alternative for central permission decisions.
+- **Microsoft Presidio** ([microsoft.github.io/presidio](https://microsoft.github.io/presidio/)) — open-source PII detection and anonymization; a self-hosted alternative for result filters.
+- **Meta Llama Prompt Guard** ([github.com/meta-llama/PurpleLlama](https://github.com/meta-llama/PurpleLlama)) — open models and tools for prompt-injection and jailbreak detection.
+
 ## Observability
 
 - **OpenTelemetry — GenAI semantic conventions** ([opentelemetry.io/docs/specs/semconv/gen-ai](https://opentelemetry.io/docs/specs/semconv/gen-ai/)) — attribute names for model-call spans. Still evolving.
