@@ -28,7 +28,7 @@ VeriSwarm has four parts. Each maps onto an extension point this module already 
 | **Passport** | Verified agent identity, signed manifests, delegated permissions | Agent and subagent identity (Chapter 7) | Pro |
 | **Vault** | Hash-chained audit ledger with integrity checks and compliance exports | Audit, alongside your run logs (Chapter 8) | Max |
 
-Plans and limits change; check the current ones before you design around them. Integration goes through the Python SDK's core client (`pip install veriswarm`, then `from veriswarm import VeriSwarmClient`) or the REST API directly.
+Plans and limits change; check the current ones before you design around them. A custom harness integrates through the Python SDK's core client (`pip install veriswarm`, then `from veriswarm import VeriSwarmClient`) or the REST API directly, as the rest of this chapter does. If your agent is built on a framework instead, the SDK (0.5.1 or later) also ships adapters for the Claude Agent SDK, LangChain, CrewAI, and the OpenAI Agents SDK that wrap your tools with the same checks.
 
 ## Gate as a permission source
 
@@ -81,7 +81,7 @@ Every remote control needs an answer to "what if the service is down?". There's 
 |---|---|
 | A wrongly allowed action is expensive or irreversible: commands, writes, payments, outbound messages | A wrongly blocked action is the bigger risk, and something else limits the damage: reads inside a sandbox |
 
-Decide per tool, write it down, and test it with a simulated outage. One thing to know: the SDK's framework adapters fail open on API errors. That's reasonable for many apps, but in a harness the choice should be yours, which is one reason this chapter integrates through the core client and your own policy.
+Decide per tool, write it down, and test it with a simulated outage. One thing to know: the SDK's framework adapters fail open on API errors, allowing the tool call. That's reasonable for many apps, but in a harness the choice should be yours, per tool, which is one reason this chapter integrates through the core client and your own policy.
 
 Also remember what an attacker gains from an outage. If blocking the trust service's network turns every check into "allow", an attacker who controls the network controls your agent. Fail closed for anything that matters.
 
