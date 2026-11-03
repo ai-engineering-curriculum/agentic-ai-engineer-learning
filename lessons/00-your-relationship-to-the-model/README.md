@@ -39,15 +39,15 @@ Each row is a sibling org: what you hand them, what they hand you, and the role 
 | Org | You hand them | They hand you | Your nearest counterpart |
 |-----|---------------|---------------|--------------------------|
 | AI Startup | Working features, honest demos, and a clear picture of what the product can promise customers today | Prioritized customer problems, what's been promised, and what 'good enough to ship' means for this market | [Founding CPO / Head of Product](https://github.com/ai-startup-curriculum/cpo-curriculum) |
-| AI Governance | System descriptions, eval results, and guardrail designs for each AI feature, plus incident reports when something goes wrong | Risk tiers, guardrail requirements, and red-team findings to fix before (and after) launch | [AI Risk Engineer](https://github.com/ai-governance-curriculum/ai-risk-engineer-learning) |
-| ML Engineering | Real failure cases and task data from production, which tell them where a fine-tune or a different model would actually help | Models, fine-tunes, and embeddings with documented strengths, failure modes, and benchmark results on relevant tasks | [Fine-Tuning Engineer](https://github.com/ml-engineering-curriculum/fine-tuning-engineer-learning) |
+| AI Governance | System descriptions, eval results, and guardrail designs for each AI feature, plus incident reports when something goes wrong | Risk tiers, guardrail requirements, and red-team findings to fix before (and after) launch | [AI Privacy Engineer](https://github.com/ai-governance-curriculum/ai-privacy-engineer-learning) |
+| ML Engineering | Real failure cases and task data from production, which tell them where a fine-tune or a different model would actually help | Models, fine-tunes, and embeddings with documented strengths, failure modes, and benchmark results on relevant tasks | [AI Data Engineer](https://github.com/ml-engineering-curriculum/ai-data-engineer-learning) |
 | AI Infrastructure | Traffic shapes, latency budgets, and model-mix requirements, so capacity and routing match how the product actually calls models | Serving endpoints with known latency, throughput, rate limits, and cost per call, plus the telemetry to debug them | [AI/ML Platform Engineer](https://github.com/AI-Infra-Curriculum/ai-infra-ml-platform-learning) |
 
 ## Your ladder
 
 - **Before this role:** [Agentic AI Developer](https://github.com/ai-engineering-curriculum/agentic-ai-developer-learning), [LLM Application Developer](https://github.com/ai-engineering-curriculum/llm-application-developer-learning)
 - **Alongside it (same level):** [AI Evaluation Engineer](https://github.com/ai-engineering-curriculum/ai-eval-engineer-learning), [Applied AI Engineer](https://github.com/ai-engineering-curriculum/applied-ai-engineer-learning), [RAG & Retrieval Engineer](https://github.com/ai-engineering-curriculum/rag-engineer-learning)
-- **After this role:** [Forward Deployed AI Engineer](https://github.com/ai-engineering-curriculum/forward-deployed-engineer-learning)
+- **After this role:** [Forward Deployed AI Engineer](https://github.com/ai-engineering-curriculum/forward-deployed-engineer-learning), [Voice & Multimodal Agent Engineer](https://github.com/ai-engineering-curriculum/voice-agent-engineer-learning)
 
 ## Scenario: One model upgrade, five orgs
 
