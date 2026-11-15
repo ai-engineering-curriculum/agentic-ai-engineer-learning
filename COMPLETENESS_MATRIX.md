@@ -2,7 +2,7 @@
 
 AI Engineering Curriculum · Level 30 · [learning](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-learning) · [solutions](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-solutions)
 
-_Generated 2026-11-03 by `aicg org completeness`._
+_Generated 2026-11-15 by `aicg org completeness`._
 
 **Overall: 100%**
 
@@ -15,8 +15,8 @@ _Generated 2026-11-03 by `aicg org completeness`._
 
 | Module | Status | Words | Chapters | Exercises | Quiz | Solutions |
 |---|---|---|---|---|---|---|
-| `mod-201-agent-fundamentals` | ✅ Complete | 12,641 | 6 | 4 | — | 4/4 |
-| `mod-202-frameworks` | ✅ Complete | 16,432 | 7 | 5 | — | 5/5 |
+| `mod-201-agent-fundamentals` | ✅ Complete | 17,924 | 6 | 4 | — | 4/4 |
+| `mod-202-frameworks` | ✅ Complete | 21,660 | 7 | 5 | — | 5/5 |
 | `mod-203-rag-and-memory` | ✅ Complete | 7,206 | 4 | 4 | — | 4/4 |
 | `mod-204-multi-agent-implementation` | ✅ Complete | 6,211 | 5 | 4 | — | 4/4 |
 | `mod-205-evaluation-observability` | ✅ Complete | 6,808 | 4 | 4 | — | 4/4 |
