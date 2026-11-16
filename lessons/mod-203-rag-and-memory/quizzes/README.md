@@ -1,3 +1,7 @@
 # RAG & Memory Implementation quizzes
 
-Authored under the autonomous fill-in loop.
+Knowledge checks for [mod-203](../README.md). Try each question before scrolling to the answer key.
+
+| # | Quiz | Covers |
+|---|---|---|
+| 01 | [RAG & Memory Implementation](quiz-01-rag-and-memory.md) | All four chapters (01–04) |
