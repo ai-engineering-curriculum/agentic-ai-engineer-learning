@@ -2,7 +2,7 @@
 
 AI Engineering Curriculum · Level 30 · [learning](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-learning) · [solutions](https://github.com/ai-engineering-curriculum/agentic-ai-engineer-solutions)
 
-_Generated 2026-11-15 by `aicg org completeness`._
+_Generated 2026-11-22 by `aicg org completeness`._
 
 **Overall: 100%**
 
@@ -17,12 +17,12 @@ _Generated 2026-11-15 by `aicg org completeness`._
 |---|---|---|---|---|---|---|
 | `mod-201-agent-fundamentals` | ✅ Complete | 17,924 | 6 | 4 | — | 4/4 |
 | `mod-202-frameworks` | ✅ Complete | 21,660 | 7 | 5 | — | 5/5 |
-| `mod-203-rag-and-memory` | ✅ Complete | 7,206 | 4 | 4 | — | 4/4 |
-| `mod-204-multi-agent-implementation` | ✅ Complete | 6,211 | 5 | 4 | — | 4/4 |
-| `mod-205-evaluation-observability` | ✅ Complete | 6,808 | 4 | 4 | — | 4/4 |
-| `mod-206-guardrails-implementation` | ✅ Complete | 6,462 | 4 | 4 | — | 4/4 |
-| `mod-207-productionizing-agents` | ✅ Complete | 6,293 | 4 | 4 | — | 4/4 |
-| `mod-208-harness-engineering` | ✅ Complete | 8,292 | 4 | 3 | — | 3/3 |
+| `mod-203-rag-and-memory` | ✅ Complete | 13,840 | 4 | 4 | — | 4/4 |
+| `mod-204-multi-agent-implementation` | ✅ Complete | 12,309 | 5 | 4 | — | 4/4 |
+| `mod-205-evaluation-observability` | ✅ Complete | 13,180 | 4 | 4 | — | 4/4 |
+| `mod-206-guardrails-implementation` | ✅ Complete | 14,323 | 4 | 4 | — | 4/4 |
+| `mod-207-productionizing-agents` | ✅ Complete | 15,044 | 4 | 4 | — | 4/4 |
+| `mod-208-harness-engineering` | ✅ Complete | 16,762 | 4 | 3 | — | 3/3 |
 | `mod-209-building-custom-harnesses` | ✅ Complete | 21,264 | 9 | 7 | — | 7/7 |
 
 ## How this is calculated
